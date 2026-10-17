@@ -1,4 +1,3 @@
-YAML
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
@@ -35,7 +34,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install  # <-- Cambiado de 'npm ci' a 'npm install' para evitar el error de package-lock.json
+        run: npm install
 
       - name: Run build
         run: npm run build
@@ -45,10 +44,10 @@ jobs:
         # the complete list of inputs can be found here: https://github.com/marketplace/actions/jscrambler#inputs
         uses: jscrambler/code-integrity-actions/protect@ab65962a2ecffcc362b75a997e24a181d0bde5fb
         with:
-          application-id: ${{ secrets.JSCRAMBLER_APPLICATION_ID }}  # This value should be created within your Jscrambler account
-          secret-key: ${{ secrets.JSCRAMBLER_SECRET_KEY }}          # This value can be found in your Jscrambler account
-          access-key: ${{ secrets.JSCRAMBLER_ACCESS_KEY }}          # This value can be found in your Jscrambler account
-          jscrambler-config-path: jscrambler.json                   # Download from your Jscrambler account
-          files-src: |                                              # List of Files to be protected
+          application-id: ${{ secrets.JSCRAMBLER_APPLICATION_ID }}
+          secret-key: ${{ secrets.JSCRAMBLER_SECRET_KEY }}
+          access-key: ${{ secrets.JSCRAMBLER_ACCESS_KEY }}
+          jscrambler-config-path: jscrambler.json
+          files-src: |
             dist/**/*
           files-dest: .
