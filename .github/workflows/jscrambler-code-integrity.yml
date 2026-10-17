@@ -1,12 +1,11 @@
+YAML
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
-
 # This is a basic workflow to help you get started with Using Jscrambler Code Integrity Action.
 # It automates the protection of your JavaScript Applications, so you can run it whenever a new version of your application is built.
 # A Jscrambler account is required to use this Workflow.
-#
 # More info can be found here : https://docs.jscrambler.com/latest/code-integrity/documentation/github-ci-integration
 
 name: Jscrambler Code Integrity
@@ -27,12 +26,20 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
-      - run: npm run build
+
+      - name: Install dependencies
+        run: npm install  # <-- Cambiado de 'npm ci' a 'npm install' para evitar el error de package-lock.json
+
+      - name: Run build
+        run: npm run build
+
       - name: Jscrambler Code Integrity
         id: jscrambler
         # the complete list of inputs can be found here: https://github.com/marketplace/actions/jscrambler#inputs
